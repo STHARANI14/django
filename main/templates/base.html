@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %} | Hotel Management</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Hotel Management System</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li><a href="{% url 'room_list' %}">Room List</a></li>
+            <li><a href="{% url 'guest_list' %}">Guest List</a></li>
+            <li><a href="{% url 'reservation_list' %}">Reservation List</a></li>
+            <li><a href="{% url 'room_create' %}">Create Room</a></li>
+            <li><a href="{% url 'guest_create' %}">Create Guest</a></li>
+            <li><a href="{% url 'reservation_create' %}">Create Reservation</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout_auth' %}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+        {% block pagination %}
+        {% if is_paginated %}
+            <ul class="pagination">
+                <!-- Pagination code goes here -->
+            </ul>
+        {% endif %}
+        {% endblock %}
+    </main>
+
+
+</body>
+</html>
